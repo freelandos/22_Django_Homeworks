@@ -120,11 +120,10 @@ def test_delete_course(api_client, course_factory):
     (21, HTTP_400_BAD_REQUEST),
 ])
 @pytest.mark.django_db
-def test_limit_create_students(api_client, student_factory, settings,
+def test_limit_create_students(api_client, student_factory,
                                students_count, expected_status):
     """Максимальное количество студентов на курсе."""
 
-    settings.MAX_STUDENTS_PER_COURSE = 20
     students = student_factory(_quantity=students_count)
     students_ids = [student.id for student in students]
     course_data = {'name': 'test_name', 'students': students_ids}

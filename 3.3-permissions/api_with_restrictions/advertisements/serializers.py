@@ -9,21 +9,18 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name',
-                  'last_name',)
+        fields = ['id', 'username', 'first_name', 'last_name']
 
 
 class AdvertisementSerializer(serializers.ModelSerializer):
     """Serializer для объявления."""
 
-    creator = UserSerializer(
-        read_only=True,
-    )
+    creator = UserSerializer(read_only=True)
 
     class Meta:
         model = Advertisement
-        fields = ('id', 'title', 'description', 'creator',
-                  'status', 'created_at',)
+        fields = ['id', 'title', 'description', 'creator',
+                  'status', 'created_at']
 
     def create(self, validated_data):
         """Метод для создания"""
@@ -40,9 +37,11 @@ class AdvertisementSerializer(serializers.ModelSerializer):
     def validate(self, data):
         """Метод для валидации. Вызывается при создании и обновлении."""
 
-        if data.get('status') in ['CLOSED', 'DRAFT']:
-            return data
-        if Advertisement.objects.filter(status='OPEN', creator=self.context['request'].user).count() >= 10:
+        method = self.context['request'].method
+        user = self.context['request'].user
+        if method == 'POST' and Advertisement.objects.filter(
+            status='OPEN', creator=user
+        ).count() >= 10:
             raise serializers.ValidationError('Exceeded allowed number of open ads.')
         return data
 

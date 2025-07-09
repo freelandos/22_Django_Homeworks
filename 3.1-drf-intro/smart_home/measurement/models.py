@@ -21,7 +21,7 @@ class Measurement(models.Model):
     image = models.ImageField(upload_to='images', blank=True, default='', verbose_name='Изображение')
 
     def __str__(self):
-        return self.sensor
+        return self.sensor.name
 
     class Meta:
         verbose_name = "Измерение"

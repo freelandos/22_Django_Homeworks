@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from decimal import Decimal
+
 DATA = {
     'omlet': {
         'яйца, шт': 2,
@@ -33,9 +35,9 @@ DATA = {
 def get_recipe(request, recipe_name):
     ingredients = DATA.get(recipe_name)
     servings = request.GET.get('servings')
-    if servings:
-        ingredients = {k: v * int(servings) for k, v in ingredients.items()}
-    context = {
-        'recipe': ingredients,
+    if ingredients and servings:
+        ingredients = {
+            k: Decimal(str(v)) * int(servings) for k, v in ingredients.items()
         }
+    context = {'recipe': ingredients}
     return render(request, 'calculator/index.html', context)

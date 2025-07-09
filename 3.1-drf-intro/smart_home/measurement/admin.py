@@ -12,4 +12,4 @@ class SensorAdmin(admin.ModelAdmin):
 @admin.register(Measurement)
 class MeasurementAdmin(admin.ModelAdmin):
     list_display = ['id', 'sensor', 'temperature', 'created_at', 'image']
-    list_display_links = ['sensor']
+    list_display_links = ['id']

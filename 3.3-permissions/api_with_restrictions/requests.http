@@ -1,0 +1,262 @@
+@baseUrl = http://localhost:8000/api
+
+
+
+
+
+# получение всех объявлений неавторизованным пользователем
+GET {{baseUrl}}/advertisements/
+
+###
+
+# получение всех объявлений авторизованным пользователем admin
+GET {{baseUrl}}/advertisements/
+Authorization: Token c8a02ea83cc7be4632b20522d50f95da5b658c63
+
+###
+
+# получение всех объявлений авторизованным пользователем user1
+GET {{baseUrl}}/advertisements/
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# получение всех объявлений авторизованным пользователем user2
+GET {{baseUrl}}/advertisements/
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+
+
+
+
+###
+
+# получение объявления неавторизованным пользователем
+GET {{baseUrl}}/advertisements/9/
+
+###
+
+# получение объявления авторизованным пользователем admin
+GET {{baseUrl}}/advertisements/9/
+Authorization: Token c8a02ea83cc7be4632b20522d50f95da5b658c63
+
+###
+
+# получение объявления авторизованным пользователем user1
+GET {{baseUrl}}/advertisements/9/
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# получение объявления авторизованным пользователем user2
+GET {{baseUrl}}/advertisements/9/
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+
+
+
+
+###
+
+# создание объявления неавторизованным пользователем
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+
+{
+  "title": "Кровать IKEA",
+  "description": "Срочно"
+}
+
+###
+
+# создание объявления авторизованным пользователем admin
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token c8a02ea83cc7be4632b20522d50f95da5b658c63
+
+{
+  "title": "Кровать IKEA",
+  "description": "Срочно"
+}
+
+###
+
+# создание объявления авторизованным пользователем user1
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+{
+  "title": "Кровать IKEA",
+  "description": "Срочно"
+}
+
+###
+
+# создание объявления авторизованным пользователем user2
+POST {{baseUrl}}/advertisements/
+Content-Type: application/json
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+{
+  "title": "Кровать IKEA",
+  "description": "Срочно"
+}
+
+
+
+
+
+###
+
+# попытка поменять объявление user1 неавторизованным пользователем
+PATCH {{baseUrl}}/advertisements/1/
+Content-Type: application/json
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# попытка поменять объявление user1 авторизованным пользователем admin
+PATCH {{baseUrl}}/advertisements/1/
+Content-Type: application/json
+Authorization: Token c8a02ea83cc7be4632b20522d50f95da5b658c63
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# попытка поменять объявление user1 авторизованным пользователем user1
+PATCH {{baseUrl}}/advertisements/1/
+Content-Type: application/json
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+{
+  "status": "CLOSED"
+}
+
+###
+
+# попытка поменять объявление user1 авторизованным пользователем user2
+PATCH {{baseUrl}}/advertisements/1/
+Content-Type: application/json
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+{
+  "status": "CLOSED"
+}
+
+
+
+
+
+###
+
+# попытка удалить объявление user2 неавторизованным пользователем
+DELETE {{baseUrl}}/advertisements/60/
+
+###
+
+# попытка удалить объявление user2 авторизованным пользователем admin
+DELETE {{baseUrl}}/advertisements/60/
+Authorization: Token c8a02ea83cc7be4632b20522d50f95da5b658c63
+
+###
+
+# попытка удалить объявление user2 авторизованным пользователем user1
+DELETE {{baseUrl}}/advertisements/61/
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# попытка удалить объявление user2 авторизованным пользователем user2
+DELETE {{baseUrl}}/advertisements/61/
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+
+
+
+
+###
+
+# фильтрация по создателю неавторизованным пользователем
+GET {{baseUrl}}/advertisements/?creator=3
+
+###
+
+# фильтрация по дате неавторизованным пользователем
+GET {{baseUrl}}/advertisements/?created_at_before=2020-10-01
+
+###
+
+# фильтрация по статусу неавторизованным пользователем
+GET {{baseUrl}}/advertisements/?status=CLOSED
+
+###
+
+# фильтрация по статусу неавторизованным пользователем
+GET {{baseUrl}}/advertisements/?status=DRAFT
+
+###
+
+# фильтрация по статусу авторизованным пользователем user1
+GET {{baseUrl}}/advertisements/?status=DRAFT
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# фильтрация по статусу авторизованным пользователем user2
+GET {{baseUrl}}/advertisements/?status=DRAFT
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+
+
+
+
+###
+
+# добавить в избранное неавторизованным пользователем
+POST {{baseUrl}}/advertisements/21/add_favorite/
+
+###
+
+# добавить в избранное объявление user1 авторизованным пользователем user1
+POST {{baseUrl}}/advertisements/1/add_favorite/
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# добавить уже в избранном объявление user1 авторизованным пользователем user2
+POST {{baseUrl}}/advertisements/3/add_favorite/
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+###
+
+# добавить в избранное объявление user1 авторизованным пользователем user2
+POST {{baseUrl}}/advertisements/10/add_favorite/
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1
+
+
+
+
+
+###
+
+# получить избранное неавторизованным пользователем
+GET {{baseUrl}}/advertisements/get_favorites
+
+###
+
+# получить избранное авторизованным пользователем user1
+GET {{baseUrl}}/advertisements/get_favorites
+Authorization: Token 092de273a04df3619051251a0fbc6c3ad232f815
+
+###
+
+# получить избранное авторизованным пользователем user2
+GET {{baseUrl}}/advertisements/get_favorites
+Authorization: Token b09d1d126a7f45e5d466f2a3583294bfb834c6d1

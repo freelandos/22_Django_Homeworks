@@ -1,5 +1,5 @@
 from django.contrib import admin
-from phones.models import Phone
+from .models import Phone
 
 
 # Register your models here.

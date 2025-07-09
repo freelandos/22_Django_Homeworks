@@ -1,8 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render, reverse
-
 import os
 from datetime import datetime
+
+from django.http import HttpResponse
+from django.shortcuts import render, reverse
 
 
 def home_view(request):
@@ -16,10 +16,8 @@ def home_view(request):
     }
     
     # context и параметры render менять не нужно
-    # подбробнее о них мы поговорим на следующих лекциях
-    context = {
-        'pages': pages
-    }
+    # подробнее о них мы поговорим на следующих лекциях
+    context = {'pages': pages}
     return render(request, template_name, context)
 
 
